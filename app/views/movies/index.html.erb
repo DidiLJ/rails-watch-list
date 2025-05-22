@@ -1,0 +1,12 @@
+
+<div class="container d-flex flex-wrap gap-3">
+  <% @movies.each do |movie| %>
+  <div class="card" style="width: 18rem;">
+    <img src=<%= "https://image.tmdb.org/t/p/w500/#{movie.poster_url}" %> class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%= movie.title %></h5>
+      <p class="card-text"><%= movie.overview %></p>
+    </div>
+  </div>
+<% end %>
+</div>

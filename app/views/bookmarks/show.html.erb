@@ -1,0 +1,29 @@
+<h1>Détail du Bookmark</h1>
+
+<div class="container">
+  <div class="card mb-4" style="width: 18rem;">
+    <img src="<%= "https://image.tmdb.org/t/p/w500/#{@bookmark.movie.poster_url}" %>" class="card-img-top" alt="<%= @bookmark.movie.title %>">
+    <div class="card-body">
+      <h5 class="card-title"><%= @bookmark.movie.title %></h5>
+      <p class="card-text"><%= @bookmark.movie.overview %></p>
+      <p class="card-text"><strong>Commentaire:</strong> <%= @bookmark.comment %></p>
+      <p class="card-text"><small class="text-muted">Ajouté à la liste: <%= @bookmark.list.name %></small></p>
+
+      <div class="d-flex justify-content-between">
+        <%= link_to "Retour à la liste", list_path(@bookmark.list), class: "btn btn-primary" %>
+        <%= link_to "Supprimer", bookmark_path(@bookmark), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr?" }, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h3>Détails du film</h3>
+    <div class="card">
+      <div class="card-body">
+        <h4><%= @bookmark.movie.title %></h4>
+        <p><strong>Note:</strong> <%= @bookmark.movie.rating %> / 10</p>
+        <p><%= @bookmark.movie.overview %></p>
+      </div>
+    </div>
+  </div>
+</div>
