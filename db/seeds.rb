@@ -10,30 +10,31 @@
 require 'faker'
 require 'open-uri'
 require "json"
-require "open-uri"
 
 url = "https://tmdb.lewagon.com/movie/top_rated"
 movies_serialized = URI.parse(url).read
 movies = JSON.parse(movies_serialized)["results"]
 
 Movie.destroy_all
+Bookmark.destroy_all
 List.destroy_all
 
-movies.each do |movie|
+movies.each do |movie_data|
   movie = Movie.create!(
-    title: movie["original_title"],
-    overview: movie["overview"],
-    poster_url: movie["poster_path"],
-    rating: movie["vote_average"]
+    title: movie_data["original_title"],
+    overview: movie_data["overview"],
+    poster_url: movie_data["poster_path"],
+    rating: movie_data["vote_average"]
   )
   puts "Created #{movie.title}"
 end
 
-10.times do |i|
-  i = List.create!(
-    name: Faker::Book.title
+10.times do |index|
+  list = List.create!(
+    name: Faker::Book.title,
+    image_url: "https://source.unsplash.com/random/300x200?movie"
   )
-  puts "Created #{i.name} list"
+  puts "Created #{list.name} list"
 end
 
 puts "Finito pipo! #{Movie.count} movies created"
